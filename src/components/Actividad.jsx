@@ -4,10 +4,10 @@ import { waapi } from 'animejs/waapi'
 import { EASE_OUT, limpiarAlTerminar, reducirMovimiento } from '../lib/movimiento.js'
 import { aMes, etiquetaMes, mesActual, mesesConActividad } from '../lib/tiempo.js'
 
-const plural = (n) => (n === 1 ? '1 proyecto' : `${n} proyectos`)
+const plural = (n) => (n === 1 ? '1 proyecto activo' : `${n} proyectos activos`)
 
-// Mapa de calor con los meses reales en que hubo commits, de enero del primer
-// año hasta hoy. Más oscuro = más proyectos ese mes.
+// Mapa de calor de los meses con proyectos activos (de su primer a su último
+// commit), de enero del primer año hasta hoy. Más oscuro = más proyectos.
 export default function Actividad({ proyectos }) {
   const raiz = useRef(null)
   const { anios, meses, hoy } = useMemo(() => {
@@ -49,12 +49,12 @@ export default function Actividad({ proyectos }) {
     <article className="bloque bloque--actividad" data-revelar ref={raiz}>
       <h2 className="bloque__titulo">Actividad</h2>
       <p className="bloque__nota">
-        Meses con commits, {anios[0]} a {anios.at(-1)}
+        Meses con proyectos activos, {anios[0]} a {anios.at(-1)}
       </p>
       <div
         className="calor"
         role="img"
-        aria-label={`${meses.size} meses con commits entre ${anios[0]} y ${anios.at(-1)}`}
+        aria-label={`${meses.size} meses con proyectos activos entre ${anios[0]} y ${anios.at(-1)}`}
       >
         {anios.map((anio) => (
           <div className="calor__fila" key={anio}>

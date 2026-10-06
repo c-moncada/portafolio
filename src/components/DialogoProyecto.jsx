@@ -3,7 +3,7 @@ import { stagger } from 'animejs/utils'
 import { waapi } from 'animejs/waapi'
 import { LINEAS } from '../data/lineas.js'
 import { EASE_CAJON, EASE_IN_OUT, EASE_OUT, limpiarAlTerminar, reducirMovimiento } from '../lib/movimiento.js'
-import { enlacesDe, estadoDe, rutaCaptura, textoEnlaceVivo } from '../lib/proyecto.js'
+import { enlacesDe, rutaCaptura, textoEnlaceVivo } from '../lib/proyecto.js'
 import { periodo } from '../lib/tiempo.js'
 import Estado from './Estado.jsx'
 import { IconoCerrar, IconoExterno } from './Iconos.jsx'
@@ -197,7 +197,7 @@ export default function DialogoProyecto({ abierto, onCerrar }) {
                 srcSet={`${rutaCaptura(proyecto.imagen.nombre, 640)} 640w, ${rutaCaptura(proyecto.imagen.nombre, 1200)} 1200w`}
                 sizes="(min-width: 64rem) 56rem, 100vw"
                 width="1200"
-                height="758"
+                height={proyecto.imagen.alto}
                 alt={proyecto.imagen.alt}
               />
             </figure>
@@ -220,11 +220,7 @@ export default function DialogoProyecto({ abierto, onCerrar }) {
               <dl className="ficha">
                 <dt>Período</dt>
                 <dd>{periodo(proyecto.inicio, proyecto.fin)}</dd>
-                <dt>Equipo</dt>
-                <dd>{proyecto.equipo ? `${proyecto.equipo} personas` : 'Individual'}</dd>
-                <dt>Estado</dt>
-                <dd>{estadoDe(proyecto).texto}</dd>
-                <dt>Líneas</dt>
+                <dt>Áreas</dt>
                 <dd>{proyecto.lineas.map((l) => LINEAS[l].nombre).join(', ')}</dd>
                 <dt>Código</dt>
                 <dd>{CODIGO[proyecto.codigo]}</dd>

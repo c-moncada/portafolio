@@ -267,7 +267,7 @@ main {
   inset: 0;
   width: 100%;
   height: 100%;
-  color: var(--acento);
+  color: var(--tinta-3);
   pointer-events: none;
   -webkit-mask-image: linear-gradient(to left, #000 10%, transparent 78%);
   mask-image: linear-gradient(to left, #000 10%, transparent 78%);
@@ -507,7 +507,7 @@ main {
 /* ---------- Proyectos ---------- */
 
 .proyectos {
-  margin-top: clamp(56px, 8vw, 96px);
+  margin-top: clamp(40px, 5vw, 64px);
   scroll-margin-top: 24px;
 }
 
@@ -656,13 +656,15 @@ main {
   color: var(--tinta-3);
 }
 
-/* Captura del sitio: asoma por la esquina inferior derecha del bloque */
+/* Captura del sitio: asoma por la esquina inferior derecha del bloque. Se ve a
+   su escala real, anclada arriba a la izquierda; el bloque solo recorta la
+   parte de abajo, que es lo que deja moverla al pasar el mouse. */
 
 .visual-imagen {
   position: relative;
-  flex: 1 1 auto;
-  min-height: 9rem;
-  margin: 18px calc(var(--relleno) * -1) calc(var(--relleno) * -1) var(--relleno);
+  flex: none;
+  aspect-ratio: 1200 / 680;
+  margin: auto calc(var(--relleno) * -1) calc(var(--relleno) * -1) var(--relleno);
   border-top: 1px solid var(--filete);
   border-left: 1px solid var(--filete);
   border-top-left-radius: 12px;
@@ -670,19 +672,28 @@ main {
   overflow: hidden;
 }
 
+.tarjeta--ancho .visual-imagen {
+  aspect-ratio: 1200 / 480;
+}
+
+/* En el bloque grande la captura es alta y llena el espacio que queda */
+.tarjeta--grande .visual-imagen {
+  flex: 1 1 auto;
+  min-height: 18rem;
+  aspect-ratio: auto;
+}
+
+.tarjeta:has(.visual-imagen) .tarjeta__stack {
+  margin-bottom: 18px;
+}
+
 .visual-imagen img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% + 24px);
-  object-fit: cover;
-  object-position: left top;
+  height: auto;
   transition: transform 700ms var(--ease-out);
-}
-
-.tarjeta--ancho .visual-imagen {
-  min-height: 11rem;
 }
 
 /* Código */
@@ -862,7 +873,7 @@ main {
   }
 
   .tarjeta:hover {
-    border-color: var(--filete-fuerte);
+    border-color: color-mix(in oklab, var(--tinta) 35%, var(--bloque));
   }
 
   .tarjeta__enlace {
@@ -993,6 +1004,9 @@ main {
 .dialogo__imagen img {
   width: 100%;
   height: auto;
+  max-height: 30rem;
+  object-fit: cover;
+  object-position: top;
 }
 
 .dialogo__cuerpo {
@@ -1224,10 +1238,6 @@ main {
     min-height: 32rem;
   }
 
-  .visual-imagen {
-    min-height: 12rem;
-  }
-
   .tarjeta--ancho .flujo {
     grid-auto-flow: row;
   }
@@ -1292,7 +1302,10 @@ main {
   .tarjeta:active,
   .boton:active,
   .contacto__copiar:active,
-  .dialogo__cerrar:active {
+  .dialogo__cerrar:active,
+  .tarjeta__enlace,
+  .tarjeta:hover .tarjeta__enlace,
+  .tarjeta:hover .visual-imagen img {
     transform: none;
   }
 }
