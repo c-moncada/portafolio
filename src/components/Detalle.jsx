@@ -78,6 +78,12 @@ export default function Detalle({ proyecto }) {
           <dd>{proyecto.equipo ? `${proyecto.equipo} personas` : 'Individual'}</dd>
           <dt>Origen</dt>
           <dd>{proyecto.origen === 'curso' ? 'Proyecto de curso' : 'Proyecto propio o para un negocio'}</dd>
+          {proyecto.enServicio && (
+            <>
+              <dt>Estado</dt>
+              <dd>{demo ? 'Demo en línea' : 'En producción'}</dd>
+            </>
+          )}
           <dt>Código</dt>
           <dd>{CODIGO[proyecto.codigo]}</dd>
           <dt>Stack</dt>

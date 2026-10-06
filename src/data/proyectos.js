@@ -3,7 +3,7 @@
 // inicio / fin   'AAAA-MM' del primer y último commit
 // origen         'propio' (propio o para un negocio) o 'curso' (de una clase)
 // equipo         número de personas, o null si lo hizo solo
-// enServicio     true si hoy hay un demo en línea
+// enServicio     true si hoy está en producción o tiene un demo en línea
 // codigo         'publico', 'privado' o 'local' (no hay repo)
 // miParte        texto o lista; null en proyectos de curso en equipo, donde no
 //                hay registro de qué hizo cada quien
@@ -49,10 +49,10 @@ export const PROYECTOS = [
     equipo: 8,
     inicio: '2026-05',
     fin: '2026-09',
-    enServicio: false,
+    enServicio: true,
     stack: ['Node', 'Express', 'Postgres', 'Neon', 'Firebase Auth', 'React', 'Vite', 'Expo', 'TypeScript'],
     resumen:
-      'Facturación con ISV, inventario, notas de crédito, pedidos de los vendedores en la calle y entregas de los repartidores. Lo construimos entre ocho personas: cada cambio entra a main por pull request y con el build en verde.',
+      'Facturación con ISV, inventario, notas de crédito, pedidos de los vendedores en la calle y entregas de los repartidores. Está en producción en la droguería. Lo construimos entre ocho personas: cada cambio entra a main por pull request y con el build en verde.',
     destacados: [
       'Cada operación que crea algo lleva una llave de idempotencia: un doble envío no duplica una factura.',
       'El precio y el impuesto los decide solo el backend, nunca el cliente.',

@@ -44,4 +44,4 @@ finish review, the verdict, and DESIGN.md
 
 ## Abiertos
 - Teléfono de contacto: el usuario lo pidió, falta el número.
-- Confirmar si el sistema KWR está en producción (hoy no se afirma).
+- (Resuelto 2026-10-05: el dueño confirmó que el sistema KWR está en producción.)

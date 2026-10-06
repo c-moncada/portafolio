@@ -26,6 +26,14 @@ function Estado({ proyecto }) {
         <span className="sr-only"> de {proyecto.nombre} en GitHub (se abre en otra pestaña)</span>
       </a>
     )
+  } else if (proyecto.enServicio) {
+    // En producción pero sin demo público: no hay nada que enlazar.
+    principal = (
+      <span className="estado estado--produccion">
+        <span className="estado__punto" aria-hidden="true" />
+        En producción
+      </span>
+    )
   } else {
     principal = (
       <span className="estado estado--mudo">{proyecto.codigo === 'local' ? 'Solo local' : 'Repo privado'}</span>

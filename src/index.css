@@ -738,6 +738,10 @@ a {
   text-decoration: none;
 }
 
+.estado--produccion {
+  text-decoration: none;
+}
+
 .estado__punto {
   flex: none;
   width: 10px;
