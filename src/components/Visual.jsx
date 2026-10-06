@@ -5,7 +5,7 @@ import Codigo from './Codigo.jsx'
 // código o, si no hay ninguno de los dos, el flujo de cómo funciona.
 export default function Visual({ proyecto }) {
   if (proyecto.imagen) {
-    const { nombre, alt } = proyecto.imagen
+    const { nombre, alt, alto } = proyecto.imagen
     return (
       <div className="visual-imagen">
         <img
@@ -13,7 +13,7 @@ export default function Visual({ proyecto }) {
           srcSet={`${rutaCaptura(nombre, 640)} 640w, ${rutaCaptura(nombre, 1200)} 1200w`}
           sizes="(min-width: 68rem) 40rem, 100vw"
           width="1200"
-          height="758"
+          height={alto}
           alt={alt}
           loading="lazy"
           decoding="async"

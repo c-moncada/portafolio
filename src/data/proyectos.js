@@ -7,7 +7,8 @@
 // codigo         'publico', 'privado' o 'local' (no hay repo)
 // enlaces        { tipo, url }; tipo 'sitio' (sitio real de un negocio),
 //                'demo' (demostración en línea) o 'codigo' (repo público)
-// imagen         captura en public/capturas/<nombre>-1200.webp y -640.webp
+// imagen         captura en public/capturas/<nombre>-1200.webp y -640.webp;
+//                alto = alto en píxeles de la versión de 1200
 // muestra        fragmento de código para el bloque: { lenguaje, etiqueta, codigo }
 // miParte        texto o lista; null en proyectos de curso en equipo, donde no
 //                hay registro de qué hizo cada quien
@@ -44,6 +45,7 @@ export const PROYECTOS = [
     enlaces: [{ tipo: 'sitio', url: 'https://farmacia-san-karlos.vercel.app' }],
     imagen: {
       nombre: 'farmacia',
+      alto: 1264,
       alt: 'Portada del sitio de Farmacia San Karlos: el titular, los botones de WhatsApp y del catálogo, y una foto de los estantes del local.',
     },
     codigo: 'privado',
@@ -177,7 +179,7 @@ export const PROYECTOS = [
     enlaces: [],
     muestra: {
       lenguaje: 'rust',
-      etiqueta: 'ejemplo.rs',
+      etiqueta: 'ejemplo.rs (entrada)',
       codigo: `fn factorial(n: i32) -> i32 {
     let mut resultado: i32 = 1;
     let mut i: i32 = 2;
@@ -247,14 +249,15 @@ export const PROYECTOS = [
     enlaces: [{ tipo: 'demo', url: 'https://inteligencia-comercial-flame.vercel.app' }],
     imagen: {
       nombre: 'inteligencia',
+      alto: 758,
       alt: 'Panel de Inteligencia comercial con datos de demostración: un puntaje del negocio de 71 sobre 100 y los indicadores de margen, dinero detenido y ventas.',
     },
     codigo: 'privado',
   },
   {
     id: 'farmacia-san-karlos-recargas',
-    nombre: 'Farmacia San Karlos',
-    variante: 'App de recargas para Android',
+    nombre: 'App de recargas',
+    variante: 'Para Farmacia San Karlos, en Android',
     lineas: ['movil'],
     origen: 'propio',
     equipo: null,
@@ -302,10 +305,6 @@ export const PROYECTOS = [
       { parada: 'Postgres en Neon', nota: 'borradores y pedidos' },
     ],
     enlaces: [{ tipo: 'demo', url: 'https://frontend-ai-ruby.vercel.app' }],
-    imagen: {
-      nombre: 'agente',
-      alt: 'Interfaz del Agente de pedidos: el chat a la izquierda y, a la derecha, el registro de las herramientas que usa el agente.',
-    },
     codigo: 'privado',
   },
   {

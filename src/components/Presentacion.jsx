@@ -49,7 +49,7 @@ export default function Presentacion({ perfil }) {
         </p>
         <p className="presentacion__lead" data-entrada>
           Construyo software que usan negocios reales: el sitio de la farmacia de mi familia, el punto de venta en
-          producción de una droguería y una API que lee placas de vehículos.
+          producción que hicimos en equipo para una droguería y una API que lee placas de vehículos.
         </p>
         <div className="presentacion__acciones" data-entrada>
           <a className="boton boton--primario" href="#proyectos">
