@@ -1,47 +1,51 @@
-# Brief: portafolio (página única)
+# Brief: portafolio (página única), rediseño
 
-Modo: Persuade (el reclutador decide si sigue con Carlos), con un índice que se
-opera como un horario. Audiencia: reclutadores y líderes técnicos, escritorio,
-30 a 90 segundos. Acción: abrir un demo en vivo o un repo, o escribirle.
+Modo: Persuade (el reclutador decide si sigue con Carlos). Audiencia:
+reclutadores y líderes técnicos, escritorio y teléfono, 30 a 90 segundos.
+Acción: abrir un proyecto, su sitio o demo, o escribirle.
+
+Historia: el 2026-10-05 el dueño rechazó la primera dirección (horario de trenes
+suizo: banda roja, tabla con eje de tiempo) por poco profesional y pidió más
+animación. Ese look queda como antirreferencia; se conservan el contenido
+verificado, los roles y los enlaces.
 
 ## Contrato de dirección
 
-**THESIS.** La carrera de Carlos leída como un horario de trenes: cada proyecto
-es una línea que corre por los meses en que estuvo activo, y en un vistazo se ve
-qué está en servicio, qué ya terminó y en qué líneas trabaja (web, móvil, API,
-IA, ciencias de la computación). Rechaza la cuadrícula de tarjetas con captura y
-el "Hola, soy Carlos".
+**THESIS.** Un tablero bento con el trabajo real: cada bloque muestra un
+proyecto funcionando (captura del sitio en vivo, flujo de datos o código), con
+un tamaño según su peso. El reclutador recorre todo de un vistazo y abre
+cualquier bloque para ver el caso completo. Rechaza la cuadrícula pareja de
+icono, título y texto, y el horario descartado.
 
-**OWN-WORLD.** Cartel de horarios ferroviario suizo. Papel blanco puro, tinta de
-imprenta casi negra, gris de nota al pie, filetes finos, y un solo rojo de señal
-que es la banda de cabecera, la marca de "hoy" y el punto de "en servicio";
-nunca decoración. Una grotesca (Archivo) en tres anchos: condensada para la
-tabla, normal para el texto, expandida para el nombre. Cifras tabulares.
-Insignias rectangulares de línea como las de tipo de tren (sólida: proyecto
-propio o de un negocio; contorno: proyecto de curso). Reloj de estación con
-segundero rojo de disco que se detiene en las 12.
+**OWN-WORLD.** Superficie neutra y profesional, clara u oscura según el sistema.
+Claro: campo #f4f5f7, bloques blancos, filetes #e4e7ec, tinta #0e1116. Oscuro:
+campo #0a0b0d, bloques #121418, filetes #23272e, tinta #eceef2. Un solo acento
+azul (#2f6bff claro, #84a9ff oscuro) para enlaces, foco y la acción principal, y
+un verde de estado solo para "en producción / en vivo". Mona Sans variable para
+todo el texto; JetBrains Mono solo dentro de los bloques de código. Bloques con
+radio de 18px y filete de 1px, sin sombras.
 
-**STORY.** El visitante entiende quién es Carlos y desde dónde trabaja
-(Tegucigalpa, UTC−6), ve la red completa de proyectos, filtra por línea, abre
-uno y lee su recorrido parada por parada (cómo funciona el sistema) y cuál fue
-su parte; termina en un demo en vivo, un repo o el contacto.
+**STORY.** Primera pantalla: quién es (nombre, rol, hora de Tegucigalpa), qué
+hace (una línea) y cómo escribirle; después, el tablero de proyectos. Cada
+bloque se abre en un caso: qué resuelve, qué parte hizo, cómo funciona, stack y
+enlaces.
 
-**FIRST VIEWPORT.** Banda roja a todo lo ancho: "Carlos Moncada" en blanco,
-ancho expandido, a la izquierda; reloj de estación con la hora de Tegucigalpa a
-la derecha. Debajo, sobre blanco: una línea de posicionamiento y el contacto.
-Enseguida, la leyenda de líneas y la cabecera negra del horario (Línea ·
-Proyecto · 2023 2024 2025 2026 · Estado) con las primeras filas y sus trazos
-visibles. Acción principal: abrir una fila o un demo en vivo.
+**FIRST VIEWPORT.** Escritorio a cuatro columnas: bloque de presentación de 2×2
+(el nombre se arma palabra por palabra sobre un campo de puntos que ondula muy
+suave, rol, una línea, botones "Ver proyectos" y "Escríbeme"), reloj, contacto,
+stack y actividad (mapa de calor con los meses reales con commits). Los
+proyectos empiezan justo debajo.
 
-**FORM.** Horario ferroviario suizo: challenger A (forma ajena), juzgado
-competitivo y elegido por el usuario sobre la dirección sorteada (#3 de 7,
-listado del compilador; sorteo random.randint(1,7) = 3; challengers
-random.sample(range(1,9),2) = [2, 5]). Mejora tomada de la carta topográfica
-(declinada): una leyenda estricta, cada marca significa una sola cosa.
+**FORM.** Bento grid: lo eligió el dueño entre tres registros convencionales
+(portafolio tech, casos de estudio, bento) después de rechazar el horario. Es el
+canon de la categoría hecho con oficio; la vara son las páginas bento de Apple,
+Linear y Vercel. Animaciones pedidas: hero animado, aparición al hacer scroll,
+hover en proyectos y transición al abrir.
 
 **FINISH.** unreviewed and undocumented is unfinished; this build ends with the
 finish review, the verdict, and DESIGN.md
 
 ## Abiertos
 - Teléfono de contacto: el usuario lo pidió, falta el número.
-- Confirmar si el sistema KWR está en producción (hoy no se afirma).
+- La app Placas en vivo muestra datos personales (placa, carro, un número); no
+  se usa su captura. Avisar al dueño.

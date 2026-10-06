@@ -54,6 +54,10 @@ placas de las fotos de una cámara. No son ejercicios de tutorial.
   farmacia-san-karlos.vercel.app, inteligencia-comercial-flame.vercel.app,
   frontend-placas.vercel.app, frontend-ai-ruby.vercel.app.
 - Historial de commits de cada repo en `C:\dev` y en GitHub.
+- El sistema KWR está en producción en la droguería (confirmado por el dueño el
+  2026-10-05).
+- La app Placas en vivo muestra datos personales del dueño (placa, carro, un
+  número); no se publica su captura.
 - Sin testimonios, sin métricas de uso, sin clientes nombrados aparte de la
   farmacia. No inventar ninguno.
 
