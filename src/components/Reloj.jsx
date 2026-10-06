@@ -6,7 +6,7 @@ import { set } from 'animejs/utils'
 import { CONSULTAS, easeOut } from '../lib/movimiento.js'
 import { desfaseZona, etiquetaUtc } from '../lib/tiempo.js'
 
-const MARCAS = Array.from({ length: 60 }, (_, i) => i)
+const HORAS = Array.from({ length: 12 }, (_, i) => i)
 
 function dos(n) {
   return String(n).padStart(2, '0')
@@ -17,8 +17,9 @@ function ahoraEn(desfase) {
   return new Date(Date.now() + desfase)
 }
 
-// Reloj de estación con la hora de Tegucigalpa. Le dice al reclutador en qué
-// zona horaria trabajo.
+// Reloj con la hora de Tegucigalpa: le dice al reclutador en qué zona horaria
+// trabajo. El segundero, como el de las estaciones suizas, da la vuelta en
+// 58,5 s y espera en las 12 a que salte el minuto.
 export default function Reloj({ zona, ciudad }) {
   const raiz = useRef(null)
   const horario = useRef(null)
@@ -40,21 +41,16 @@ export default function Reloj({ zona, ciudad }) {
         const h = t.getUTCHours()
         const m = t.getUTCMinutes()
         const s = t.getUTCSeconds()
-
-        // Como el reloj de las estaciones suizas: el segundero da la vuelta en
-        // 58,5 s y espera en las 12 hasta que salta el minuto.
         const enElMinuto = s * 1000 + t.getUTCMilliseconds()
-        const giro = reducir ? s * 6 : Math.min(enElMinuto / 58_500, 1) * 360
-        set(segundero.current, { rotate: giro })
+        set(segundero.current, { rotate: reducir ? s * 6 : Math.min(enElMinuto / 58_500, 1) * 360 })
 
         const minutoDelDia = h * 60 + m
         if (minutoDelDia === minutoPintado) return
-        const manecillas = [
+        const saltar = minutoPintado !== null && !reducir && minutoDelDia > minutoPintado
+        for (const [manecilla, angulo] of [
           [minutero.current, minutoDelDia * 6],
           [horario.current, minutoDelDia * 0.5],
-        ]
-        const saltar = minutoPintado !== null && !reducir && minutoDelDia > minutoPintado
-        for (const [manecilla, angulo] of manecillas) {
+        ]) {
           if (saltar) animate(manecilla, { rotate: angulo, duration: 160, ease: easeOut })
           else set(manecilla, { rotate: angulo })
         }
@@ -70,34 +66,36 @@ export default function Reloj({ zona, ciudad }) {
   }, [desfase])
 
   return (
-    <div className="reloj" ref={raiz}>
-      <div className="reloj__caja">
-        <svg className="reloj__esfera" viewBox="-50 -50 100 100" role="img" aria-label={`Hora en ${ciudad}: ${hora}`}>
-          <circle className="reloj__fondo" r="48.5" />
-          <g className="reloj__marcas">
-            {MARCAS.map((i) =>
-              i % 5 === 0 ? (
-                <rect key={i} x="-1.8" y="-45" width="3.6" height="11" transform={`rotate(${i * 6})`} />
-              ) : (
-                <rect key={i} x="-0.7" y="-45" width="1.4" height="3.8" transform={`rotate(${i * 6})`} />
-              ),
-            )}
-          </g>
-          <g ref={horario} className="reloj__manecilla">
-            <rect x="-3.3" y="-27" width="6.6" height="35" />
-          </g>
-          <g ref={minutero} className="reloj__manecilla">
-            <rect x="-2.5" y="-42" width="5" height="50" />
-          </g>
-          <g ref={segundero} className="reloj__segundero">
-            <rect x="-0.8" y="-31" width="1.6" height="45" />
-            <circle cy="-31" r="5.2" />
-          </g>
-        </svg>
-      </div>
-      <p className="reloj__hora">
-        <time>{hora}</time> {ciudad} · <span className="reloj__utc">{etiquetaUtc(desfase)}</span>
+    <article className="bloque bloque--reloj" data-revelar ref={raiz}>
+      <h2 className="bloque__titulo">Hora en {ciudad}</h2>
+      <svg className="reloj" viewBox="-50 -50 100 100" aria-hidden="true">
+        <circle className="reloj__esfera" r="47" />
+        {HORAS.map((i) => (
+          <line
+            key={i}
+            className="reloj__marca"
+            x1="0"
+            y1="-41"
+            x2="0"
+            y2={i % 3 === 0 ? -33 : -37}
+            transform={`rotate(${i * 30})`}
+          />
+        ))}
+        <g ref={horario}>
+          <line className="reloj__horario" x1="0" y1="6" x2="0" y2="-22" />
+        </g>
+        <g ref={minutero}>
+          <line className="reloj__minutero" x1="0" y1="8" x2="0" y2="-34" />
+        </g>
+        <g ref={segundero} className="reloj__segundero">
+          <line x1="0" y1="10" x2="0" y2="-36" />
+          <circle r="2.4" />
+        </g>
+      </svg>
+      <p className="reloj__digital">
+        <time>{hora}</time>
+        <span className="reloj__utc">{etiquetaUtc(desfase)}</span>
       </p>
-    </div>
+    </article>
   )
 }

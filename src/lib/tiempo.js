@@ -28,45 +28,18 @@ export function periodo(inicio, fin) {
   return `${nombreMes(a)} ${anioDe(a)} – ${nombreMes(b)} ${anioDe(b)}`
 }
 
-// El eje va de enero del primer año a diciembre del último, y siempre incluye hoy.
-// Cada año ocupa un ancho que crece con sus meses de actividad: así el año con
-// más proyectos se puede leer sin que los años tranquilos se coman el espacio.
-// Dentro de un año, el tiempo es lineal.
-export function crearEje(proyectos, hoy) {
-  const primero = Math.min(...proyectos.map((p) => aMes(p.inicio)))
-  const ultimo = Math.max(hoy, ...proyectos.map((p) => aMes(p.fin)))
-  const anios = []
-  for (let anio = anioDe(primero); anio <= anioDe(ultimo); anio++) anios.push(anio)
-
-  const activos = new Set()
+// Cuántos proyectos tuvieron commits en cada mes: Map(mes entero -> cantidad).
+export function mesesConActividad(proyectos) {
+  const meses = new Map()
   for (const p of proyectos) {
-    for (let mes = aMes(p.inicio); mes <= aMes(p.fin); mes++) activos.add(mes)
+    for (let mes = aMes(p.inicio); mes <= aMes(p.fin); mes++) meses.set(mes, (meses.get(mes) ?? 0) + 1)
   }
-  const pesos = anios.map((anio) => {
-    let meses = 0
-    for (let i = 0; i < 12; i++) if (activos.has(anio * 12 + i)) meses++
-    return 0.5 + meses / 2
-  })
-  const total = pesos.reduce((a, b) => a + b, 0)
-  const inicios = pesos.map((_, i) => pesos.slice(0, i).reduce((a, b) => a + b, 0))
+  return meses
+}
 
-  // Posición en porcentaje; acepta meses fraccionarios.
-  const x = (mes) => {
-    const i = anioDe(mes) - anios[0]
-    if (i < 0) return 0
-    if (i >= anios.length) return 100
-    const dentroDelAnio = (mes - anioDe(mes) * 12) / 12
-    return ((inicios[i] + pesos[i] * dentroDelAnio) / total) * 100
-  }
-
-  return {
-    anios,
-    hoy,
-    // Borde izquierdo de un mes.
-    x,
-    // Centro de un mes.
-    centro: (mes) => x(mes + 0.5),
-  }
+// "sep 2026"
+export function etiquetaMes(mes) {
+  return `${nombreMes(mes)} ${anioDe(mes)}`
 }
 
 // Milisegundos que hay que sumarle a la hora UTC para obtener la hora en `zona`.

@@ -5,6 +5,10 @@
 // equipo         número de personas, o null si lo hizo solo
 // enServicio     true si hoy está en producción o tiene un demo en línea
 // codigo         'publico', 'privado' o 'local' (no hay repo)
+// enlaces        { tipo, url }; tipo 'sitio' (sitio real de un negocio),
+//                'demo' (demostración en línea) o 'codigo' (repo público)
+// imagen         captura en public/capturas/<nombre>-1200.webp y -640.webp
+// muestra        fragmento de código para el bloque: { lenguaje, etiqueta, codigo }
 // miParte        texto o lista; null en proyectos de curso en equipo, donde no
 //                hay registro de qué hizo cada quien
 //
@@ -24,7 +28,7 @@ export const PROYECTOS = [
     enServicio: true,
     stack: ['React', 'Vite', 'Node', 'Postgres', 'Neon', 'Vercel', 'Render'],
     resumen:
-      'La farmacia de mi familia en Barrio Guanacaste no aparecía bien en Google. El sitio dice dónde está y a qué hora abre, y muestra los 2.860 productos reales del inventario, sin precios; la consulta se hace por WhatsApp.',
+      'La farmacia de mi familia en Barrio Guanacaste no aparecía bien en Google. El sitio dice dónde está y a qué hora abre, y muestra los más de 2.800 productos reales del inventario, sin precios; la consulta se hace por WhatsApp.',
     destacados: [
       'El catálogo se trae de la API al compilar y sale escrito en el HTML: ningún visitante le hace una llamada a la API.',
       'Las dos páginas se pre-renderizan a HTML estático para que Google las lea completas.',
@@ -37,7 +41,11 @@ export const PROYECTOS = [
       { parada: 'HTML pre-renderizado', nota: 'React y Vite, dos páginas' },
       { parada: 'Visitante', nota: 'consulta por WhatsApp' },
     ],
-    enlaces: [{ tipo: 'demo', url: 'https://farmacia-san-karlos.vercel.app' }],
+    enlaces: [{ tipo: 'sitio', url: 'https://farmacia-san-karlos.vercel.app' }],
+    imagen: {
+      nombre: 'farmacia',
+      alt: 'Portada del sitio de Farmacia San Karlos: el titular, los botones de WhatsApp y del catálogo, y una foto de los estantes del local.',
+    },
     codigo: 'privado',
   },
   {
@@ -102,6 +110,19 @@ export const PROYECTOS = [
       { parada: 'Respuesta JSON', nota: 'texto, recorte y confianza' },
     ],
     enlaces: [{ tipo: 'codigo', url: 'https://github.com/c-moncada/alpr-api' }],
+    muestra: {
+      lenguaje: 'json',
+      etiqueta: 'Respuesta de ejemplo',
+      codigo: `{
+  "placas": [{
+    "texto": "ABC1234",
+    "confianza_deteccion": 0.934,
+    "confianza_ocr": 0.9999
+  }],
+  "velocidad_kmh": 3.5,
+  "ms_procesamiento": 57.38
+}`,
+    },
     codigo: 'publico',
   },
   {
@@ -154,6 +175,19 @@ export const PROYECTOS = [
       { parada: 'Errores', nota: 'con línea y columna' },
     ],
     enlaces: [],
+    muestra: {
+      lenguaje: 'rust',
+      etiqueta: 'ejemplo.rs',
+      codigo: `fn factorial(n: i32) -> i32 {
+    let mut resultado: i32 = 1;
+    let mut i: i32 = 2;
+    while i <= n {
+        resultado = resultado * i;
+        i = i + 1;
+    }
+    return resultado;
+}`,
+    },
     codigo: 'privado',
   },
   {
@@ -211,6 +245,10 @@ export const PROYECTOS = [
       { parada: 'Plan de acción', nota: 'en pantalla y en CSV' },
     ],
     enlaces: [{ tipo: 'demo', url: 'https://inteligencia-comercial-flame.vercel.app' }],
+    imagen: {
+      nombre: 'inteligencia',
+      alt: 'Panel de Inteligencia comercial con datos de demostración: un puntaje del negocio de 71 sobre 100 y los indicadores de margen, dinero detenido y ventas.',
+    },
     codigo: 'privado',
   },
   {
@@ -264,6 +302,10 @@ export const PROYECTOS = [
       { parada: 'Postgres en Neon', nota: 'borradores y pedidos' },
     ],
     enlaces: [{ tipo: 'demo', url: 'https://frontend-ai-ruby.vercel.app' }],
+    imagen: {
+      nombre: 'agente',
+      alt: 'Interfaz del Agente de pedidos: el chat a la izquierda y, a la derecha, el registro de las herramientas que usa el agente.',
+    },
     codigo: 'privado',
   },
   {

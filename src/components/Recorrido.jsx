@@ -4,7 +4,7 @@ export default function Recorrido({ paradas }) {
   const ultima = paradas.length - 1
   return (
     <div className="recorrido">
-      <h4 className="detalle__subtitulo">Cómo funciona</h4>
+      <h3 className="dialogo__subtitulo">Cómo funciona</h3>
       <ol className="recorrido__lista">
         {paradas.map((parada, i) => (
           <li
